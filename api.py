@@ -25,6 +25,15 @@ def assign_with_csv(file_name):
     conn = get_connection()
     inlay_strategy(conn)
 
+@app.get("/search")
+def search(personal_number):
+    conn = get_connection()
+    cur = conn.cursor()
+    cur.execute(f"""
+                SELECT status,house_id,room_id  FROM soldiers WHERE personal_number = {personal_number}
+                """)
+    result = cur.fetchall()
+    return result
 
 
 
